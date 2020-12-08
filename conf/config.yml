@@ -1,0 +1,8 @@
+log:
+  file: STDOUT
+  level: DEBUG
+  max_age: 1000h
+  rotate: 24h
+
+http:
+  addr: :11000
