@@ -10,7 +10,7 @@ import (
 
 func initSrv() *Service {
 	srv := Service{}
-	srv.Init(nil)
+	_ = srv.Init(nil)
 
 	return &srv
 }

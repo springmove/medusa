@@ -131,8 +131,8 @@ github.com/lestrrat-go/strftime v1.0.1 h1:o7qz5pmLzPDLyGW4lG6JvTKPUfTFXwe+vOamIY
 github.com/lestrrat-go/strftime v1.0.1/go.mod h1:E1nN3pCbtMSu1yjSVeyuRFVm/U0xoR76fd03sz+Qz4g=
 github.com/lib/pq v1.1.1 h1:sJZmqHoEaY7f+NPP8pgLB/WxulyR3fewgCM2qaSlBb4=
 github.com/lib/pq v1.1.1/go.mod h1:5WUZQaWbwv1U+lTReE5YruASi9Al49XbQIvNi/34Woo=
-github.com/linshenqi/sptty v0.0.0-20201208005556-d078eeda1982 h1:GDrNYZxms0GuYXEXZ8ElTOlRzOD8VpZUpYUi8dJiaCg=
-github.com/linshenqi/sptty v0.0.0-20201208005556-d078eeda1982/go.mod h1:oo+Fzz5tOSnkIq9Vb8FudxzhYOuw6L3/eyXSB8pXowI=
+github.com/linshenqi/sptty v0.0.0-20201222153716-9b40d685214f h1:BAiNnEM3GuWQhGyoUnwVegM8mIGGOVSkGXGVYRtTTRQ=
+github.com/linshenqi/sptty v0.0.0-20201222153716-9b40d685214f/go.mod h1:oo+Fzz5tOSnkIq9Vb8FudxzhYOuw6L3/eyXSB8pXowI=
 github.com/magiconair/properties v1.8.0/go.mod h1:PppfXfuXeibc/6YijjN8zIbojt8czPbwD3XqdrwzmxQ=
 github.com/mattn/go-colorable v0.1.4 h1:snbPLB8fVfU9iwbbo30TPtbLRzwWu6aJS6Xh4eaaviA=
 github.com/mattn/go-colorable v0.1.4/go.mod h1:U0ppj6V5qS13XJ6of8GYAs25YV2eR4EVcfRqFIhoBtE=

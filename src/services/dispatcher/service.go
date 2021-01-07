@@ -20,7 +20,7 @@ func (s *Service) ServiceName() string {
 	return base.ServiceDispatcher
 }
 
-func (s *Service) Init(app sptty.Sptty) error {
+func (s *Service) Init(app sptty.ISptty) error {
 	s.mtx = sync.Mutex{}
 	s.dispatchers = map[string]*Dispatcher{}
 
