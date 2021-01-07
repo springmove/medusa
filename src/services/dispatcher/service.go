@@ -8,26 +8,22 @@ import (
 	"github.com/linshenqi/sptty"
 )
 
-const (
-	ServiceName = "dispatcher"
-)
-
 type Service struct {
 	sptty.BaseService
-	base.IDispatcher
+	base.IDispatcherService
 
 	mtx         sync.Mutex
-	dispatchers map[string]*base.Dispatcher
+	dispatchers map[string]*Dispatcher
 }
 
 func (s *Service) ServiceName() string {
-	s.mtx = sync.Mutex{}
-	s.dispatchers = map[string]*base.Dispatcher{}
-
-	return ServiceName
+	return base.ServiceDispatcher
 }
 
 func (s *Service) Init(app sptty.Sptty) error {
+	s.mtx = sync.Mutex{}
+	s.dispatchers = map[string]*Dispatcher{}
+
 	return nil
 }
 
@@ -40,9 +36,7 @@ func (s *Service) Release() {
 	}
 }
 
-func (s *Service) getDispatcherByName(dispatcherName string) (*base.Dispatcher, error) {
-	s.mtx.Lock()
-	defer s.mtx.Unlock()
+func (s *Service) getDispatcherByName(dispatcherName string) (*Dispatcher, error) {
 
 	dispatcher, exist := s.dispatchers[dispatcherName]
 	if !exist {
@@ -53,48 +47,69 @@ func (s *Service) getDispatcherByName(dispatcherName string) (*base.Dispatcher, 
 }
 
 func (s *Service) CreateDispatcher(dispatcherName string, params ...uint) error {
+	s.mtx.Lock()
+	defer s.mtx.Unlock()
+
 	_, err := s.getDispatcherByName(dispatcherName)
 	if err == nil {
 		return nil
 	}
 
-	s.mtx.Lock()
-	defer s.mtx.Unlock()
-
-	s.dispatchers[dispatcherName] = base.CreateDispatcher(params...)
+	s.dispatchers[dispatcherName] = CreateDispatcher(params...)
 
 	return nil
 }
 
-func (s *Service) RemoveDispatcher(dispatcherName string) {
-	dispatch, err := s.getDispatcherByName(dispatcherName)
-	if err != nil {
-		return
-	}
-
-	dispatch.Release()
-
+func (s *Service) RemoveDispatcher(dispatcherName string) error {
 	s.mtx.Lock()
 	defer s.mtx.Unlock()
+
+	dispatcher, err := s.getDispatcherByName(dispatcherName)
+	if err != nil {
+		return err
+	}
+
+	dispatcher.Release()
 	delete(s.dispatchers, dispatcherName)
+
+	return nil
 }
 
 func (s *Service) Dispatch(dispatcherName string, data interface{}) error {
-	dispatch, err := s.getDispatcherByName(dispatcherName)
+	s.mtx.Lock()
+	defer s.mtx.Unlock()
+
+	dispatcher, err := s.getDispatcherByName(dispatcherName)
 	if err != nil {
 		return err
 	}
 
-	dispatch.Dispatch(data)
+	dispatcher.Dispatch(data)
 	return nil
 }
 
-func (s *Service) AddHandler(dispatcherName string, handler interface{}, handlerName ...string) error {
-	dispatch, err := s.getDispatcherByName(dispatcherName)
+func (s *Service) AddDispatcherHandler(dispatcherName string, handler base.DispatcherHander, handlerName ...string) error {
+	s.mtx.Lock()
+	defer s.mtx.Unlock()
+
+	dispatcher, err := s.getDispatcherByName(dispatcherName)
 	if err != nil {
 		return err
 	}
 
-	dispatch.AddHandler(handler, handlerName...)
+	dispatcher.AddHandler(handler, handlerName...)
+	return nil
+}
+
+func (s *Service) RemoveDispatcherHandler(dispatcherName string, handlerName string) error {
+	s.mtx.Lock()
+	defer s.mtx.Unlock()
+
+	dispatcher, err := s.getDispatcherByName(dispatcherName)
+	if err != nil {
+		return err
+	}
+
+	dispatcher.RemoveHandler(handlerName)
 	return nil
 }
