@@ -34,11 +34,13 @@ func (s *Timer) Release() {
 }
 
 func (s *Timer) asyncWorker() {
-	for {
-		select {
-		case <-time.After(s.itv):
-			go s.handler()
+	ticker := time.NewTicker(s.itv)
 
+	for {
+		go s.handler()
+
+		select {
+		case <-ticker.C:
 		case <-s.done:
 			return
 		}
