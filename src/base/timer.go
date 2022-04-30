@@ -9,7 +9,7 @@ const (
 type TimerHander func()
 
 // loop task based on duration trigger
-type ITimerService interface {
+type IServiceTimer interface {
 	CreateTimer(timerName string, handler TimerHander, itv ...time.Duration) error
 	RemoveTimer(timerName string) error
 }

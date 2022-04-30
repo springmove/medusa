@@ -3,7 +3,7 @@ package timer
 import (
 	"time"
 
-	"github.com/linshenqi/medusa/src/services/base"
+	"github.com/linshenqi/medusa/src/base"
 )
 
 // param1： handler func

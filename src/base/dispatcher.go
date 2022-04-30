@@ -8,7 +8,7 @@ const (
 type DispatcherHander interface{}
 
 // async producer/consumer
-type IDispatcherService interface {
+type IServiceDispatcher interface {
 	CreateDispatcher(dispatcherName string, params ...uint) error
 	RemoveDispatcher(dispatcherName string) error
 	Dispatch(dispatcherName string, data interface{}) error

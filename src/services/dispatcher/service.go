@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/linshenqi/medusa/src/services/base"
+	"github.com/linshenqi/medusa/src/base"
 	"github.com/linshenqi/sptty"
 )
 
