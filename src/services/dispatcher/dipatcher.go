@@ -4,8 +4,8 @@ import (
 	"reflect"
 	"sync"
 
-	"github.com/linshenqi/medusa/src/base"
-	"github.com/linshenqi/sptty"
+	"github.com/springmove/medusa/src/base"
+	"github.com/springmove/sptty"
 )
 
 // param1： buffer size

@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/linshenqi/medusa/src/base"
-	"github.com/linshenqi/sptty"
+	"github.com/springmove/medusa/src/base"
+	"github.com/springmove/sptty"
 )
 
 type Service struct {
 	sptty.BaseService
-	base.IDispatcherService
+	base.IServiceDispatcher
 
 	mtx         sync.Mutex
 	dispatchers map[string]*Dispatcher

@@ -5,13 +5,13 @@ import (
 	"sync"
 	"time"
 
-	"github.com/linshenqi/medusa/src/base"
-	"github.com/linshenqi/sptty"
+	"github.com/springmove/medusa/src/base"
+	"github.com/springmove/sptty"
 )
 
 type Service struct {
 	sptty.BaseService
-	base.ITimerService
+	base.IServiceTimer
 
 	mtx    sync.Mutex
 	timers map[string]*Timer
